@@ -1,6 +1,5 @@
 import { Change, diffJson, diffLines, diffWords } from 'diff';
 import React, { useEffect, useMemo, useState } from 'react';
-import '../styles/VersionCompare.css';
 
 // Types
 export interface VersionData {

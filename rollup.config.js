@@ -1,4 +1,3 @@
-// rollup.config.js
 import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
@@ -10,44 +9,60 @@ import postcss from 'rollup-plugin-postcss';
 const packageJson = require('./package.json');
 
 export default [
+  // Main build
   {
     input: 'src/index.ts',
     output: [
       {
-        file: packageJson.main,
+        file: 'dist/cjs/index.js',
         format: 'cjs',
         sourcemap: true,
+        exports: 'named'
       },
       {
-        file: packageJson.module,
+        file: 'dist/esm/index.js',
         format: 'esm',
-        sourcemap: true,
-      },
+        sourcemap: true
+      }
     ],
     plugins: [
       peerDepsExternal(),
-      resolve(),
+      resolve({
+        browser: true
+      }),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript({
+        tsconfig: './tsconfig.json',
+        declaration: false,
+        declarationMap: false
+      }),
       babel({
         babelHelpers: 'bundled',
         exclude: 'node_modules/**',
-        presets: ['@babel/preset-env', '@babel/preset-react'],
+        presets: [
+          ['@babel/preset-env', { modules: false }],
+          ['@babel/preset-react', { runtime: 'automatic' }]
+        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
       }),
       postcss({
-        extensions: ['.css'],
+        extract: 'styles.css',
         minimize: true,
-        inject: {
-          insertAt: 'top',
-        },
-      }),
+        sourceMap: true
+      })
     ],
-    external: ['react', 'react-dom', 'diff'],
+    external: ['react', 'react-dom']
   },
+  // Type definitions
   {
-    input: 'dist/esm/types/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    plugins: [dts()],
-    external: [/\.css$/],
-  },
+    input: 'src/index.ts',
+    output: {
+      file: 'dist/index.d.ts',
+      format: 'esm'
+    },
+    plugins: [
+      dts()
+    ],
+    external: [/\.css$/]
+  }
 ];

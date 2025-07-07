@@ -1,14 +1,51 @@
 {
   "name": "react-version-compare",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A React component for comparing different versions of content with a side-by-side or unified diff view. Features include smart diffing for various content types (JSON, text, code), line numbers, version selection, and highlighted changes.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "diff",
+    "version",
+    "compare",
+    "comparison",
+    "side-by-side",
+    "unified",
+    "git-diff",
+    "code-diff",
+    "json-diff",
+    "typescript"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/CrashBytes/react-version-compare#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrashBytes/react-version-compare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CrashBytes/react-version-compare/issues"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "dependencies": {
     "diff": "^8.0.1"
   },
@@ -16,10 +53,23 @@
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-typescript": "^12.1.2",
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "babel-jest": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rollup": "^4.40.2",
     "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
