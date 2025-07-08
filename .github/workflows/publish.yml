@@ -1,7 +1,7 @@
 name: Publish to NPM
 
 on:
-  # This workflow runs on every push to main and can also be triggered manually
+  # This workflow runs on every merge to main and can also be triggered manually
   push:
     branches:
       - main

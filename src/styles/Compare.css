@@ -119,6 +119,48 @@
   font-weight: 500;
 }
 
+/* Contentful document comparison styles */
+.diff-structure-type {
+  font-weight: bold;
+  color: #4a5568;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.diff-structure-level {
+  color: #718096;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}
+
+.diff-structure-content {
+  margin-left: 0.5rem;
+}
+
+.diff-removed-line .diff-structure-type {
+  color: #c53030;
+}
+
+.diff-added-line .diff-structure-type {
+  color: #38a169;
+}
+
+.diff-unchanged-line .diff-structure-type {
+  color: #4a5568;
+}
+
+/* Enhanced styles for Contentful content */
+.compare-content .diff-structure-type {
+  display: inline-block;
+  min-width: 80px;
+}
+
+.compare-content .diff-structure-level {
+  display: inline-block;
+  min-width: 20px;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .compare-side-by-side {
