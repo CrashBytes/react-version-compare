@@ -26,11 +26,11 @@ The Storybook provides interactive examples for all comparison scenarios. You ca
 ## Installation
 
 ```bash
-npm install react-version-compare
+npm install @crashbytes/react-version-compare
 ```
 
 ```bash
-yarn add react-version-compare
+yarn add @crashbytes/react-version-compare
 ```
 
 ## Basic Usage
