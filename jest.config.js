@@ -28,14 +28,17 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
-    '!src/index.ts'
+    '!src/index.ts',
+    '!src/examples/**',
+    '!src/stories/**',
+    '!src/storybook/**'
   ],
- coverageThreshold: {
+  coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 90,
+      functions: 100,
+      lines: 100,
+      statements: 100,
     },
   },
   transformIgnorePatterns: [
