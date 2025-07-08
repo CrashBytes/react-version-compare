@@ -1,13 +1,10 @@
 name: Publish to NPM
 
 on:
-  # This workflow runs when a GitHub Release is published or manually via the Actions tab.
-  # To publish on every push to main, replace this with:
-  # push:
-  #   branches:
-  #     - main
-  release:
-    types: [published]
+  # This workflow runs on every push to main and can also be triggered manually
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -50,17 +47,16 @@ jobs:
       - name: Build package
         run: npm run build
 
-      # Optional: Auto-increment version if not using GitHub Releases for versioning.
-      # If you want to bump the version automatically on publish (not recommended with release-based flows),
-      # uncomment the following step. This will update package.json, create a git tag, and push it.
-      # - name: Bump version
-      #   run: |
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --global user.name "github-actions[bot]"
-      #     npm version patch -m "ci: bump version to %s [skip ci]"
-      #     git push --follow-tags
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Automatically bump the patch version, commit, tag, and push.
+      # You can change 'patch' to 'minor' or 'major' as needed.
+      - name: Bump version
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          npm version patch -m "ci: bump version to %s [skip ci]"
+          git push --follow-tags
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to NPM
         run: npm publish
@@ -68,9 +64,11 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 # Notes:
-# - This workflow is triggered by a published GitHub Release or manually.
-# - The "Bump version" step is commented out because with release-based publishing,
-#   the version should be bumped before creating the release. Uncomment if you want
-#   to auto-increment the version on publish (not recommended with release-based flows).
+# - This workflow runs on every push to main and will:
+#   1. Run tests and type checks.
+#   2. Build the package.
+#   3. Bump the patch version (change to minor/major if needed), commit, and push the tag.
+#   4. Publish the new version to npm.
 # - NPM_TOKEN must be set in your repository secrets for publishing to work.
-# - If you want to auto-publish on every push to main, change the 'on:' section as shown above.
+# - GITHUB_TOKEN is used to push the version bump and tag.
+# - [skip ci] in the commit message prevents triggering another workflow run from the version bump commit.
