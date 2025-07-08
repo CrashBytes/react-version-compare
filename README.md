@@ -160,3 +160,17 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Support
 
 If you encounter any issues or have questions, please [open an issue](https://github.com/CrashBytes/react-version-compare/issues) on GitHub.
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for release history.
+
+## Versioning
+
+To bump the version, use [npm version](https://docs.npmjs.com/cli/v10/commands/npm-version):
+
+```sh
+npm version patch   # or 'minor' or 'major'
+```
+
+This will update `package.json`, create a git tag, and (optionally) commit the change.
