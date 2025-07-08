@@ -2,26 +2,21 @@ import React from 'react';
 import Compare from '../src';
 import '../src/styles/Compare.css';
 
-const arrayOriginal = [
-  'USS Enterprise',
-  'USS Voyager',
-  'USS Defiant'
-];
+type ArrayExampleProps = {
+  original?: string[];
+  modified?: string[];
+  title?: string;
+};
 
-const arrayModified = [
-  'USS Discovery',
-  'USS Voyager',
-  'USS Cerritos'
-];
-
-const StarshipArrayDemo = () => (
+const ArrayExample: React.FC<ArrayExampleProps> = ({
+  original = ['USS Enterprise', 'USS Voyager', 'USS Defiant'],
+  modified = ['USS Discovery', 'USS Voyager', 'USS Cerritos'],
+  title = "Example 3: Starship Array Comparison",
+}) => (
   <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '20px' }}>
-    <h2>Example 3: Starship Array Comparison</h2>
-    <Compare
-      original={arrayOriginal}
-      modified={arrayModified}
-    />
+    <h2>{title}</h2>
+    <Compare original={original} modified={modified} />
   </div>
 );
 
-export default StarshipArrayDemo;
+export default ArrayExample;
