@@ -10,7 +10,14 @@ export default {
   title: 'Examples/All',
 };
 
-export const SimpleParagraph = (args) => <SimpleParagraphExample {...args} />;
+interface SimpleParagraphArgs {
+  original: string;
+  modified: string;
+  title: string;
+  description?: string;
+}
+
+export const SimpleParagraph = (args: SimpleParagraphArgs) => <SimpleParagraphExample {...args} />;
 SimpleParagraph.args = {
   original: "I am Captain Kirk, Captain of the USS Enterprise.",
   modified: "I am Captain Picard, Captain of the USS Enterprise.",
@@ -18,7 +25,14 @@ SimpleParagraph.args = {
   description: 'Only "Kirk" and "Picard" should be highlighted',
 };
 
-export const ComplexParagraph = (args) => <ComplexParagraphExample {...args} />;
+interface ComplexParagraphArgs {
+  original: string;
+  modified: string;
+  title: string;
+  description?: string;
+}
+
+export const ComplexParagraph = (args: ComplexParagraphArgs) => <ComplexParagraphExample {...args} />;
 ComplexParagraph.args = {
   original: "I am Captain Kirk, Captain of the USS Enterprise.",
   modified: "I am Commander Benjamin Sisko, Commander of Deep Space 9.",
@@ -26,14 +40,39 @@ ComplexParagraph.args = {
   description: "Multiple changes highlighted",
 };
 
-export const Array = (args) => <ArrayExample {...args} />;
+interface ExampleArgs {
+  original: string;
+  modified: string;
+  title: string;
+  description?: string;
+}
+
+interface ArrayExampleArgs {
+  original: string[];
+  modified: string[];
+  title: string;
+  description?: string;
+}
+
+interface CaseInsensitiveArgs extends ArrayExampleArgs {
+  caseSensitive: boolean;
+}
+
+export const Array = (args: ArrayExampleArgs) => <ArrayExample {...args} />;
 Array.args = {
   original: ['USS Enterprise', 'USS Voyager', 'USS Defiant'],
   modified: ['USS Discovery', 'USS Voyager', 'USS Cerritos'],
   title: "Example 3: Starship Array Comparison",
 };
 
-export const Disordered = (args) => <DisorderedArray {...args} />;
+interface DisorderedArrayArgs {
+  original: string[];
+  modified: string[];
+  title: string;
+  description?: string;
+}
+
+export const Disordered = (args: DisorderedArrayArgs) => <DisorderedArray {...args} />;
 Disordered.args = {
   original: ['Vulcan', 'Earth', 'Romulus'],
   modified: ['Earth', 'Romulus', 'Vulcan'],
@@ -41,7 +80,7 @@ Disordered.args = {
   description: "Order matters in this comparison",
 };
 
-export const CaseInsensitive = (args) => <CaseInsensitiveExample {...args} />;
+export const CaseInsensitive = (args: CaseInsensitiveArgs) => <CaseInsensitiveExample {...args} />;
 CaseInsensitive.args = {
   original: ['Vulcan', 'Earth', 'Romulus'],
   modified: ['romulus', 'vulcan', 'earth'],
@@ -50,7 +89,9 @@ CaseInsensitive.args = {
   caseSensitive: false,
 };
 
-export const OrderInsensitive = (args) => <OrderInsensitiveExample {...args} />;
+interface OrderInsensitiveArgs extends CaseInsensitiveArgs {}
+
+export const OrderInsensitive = (args: OrderInsensitiveArgs) => <OrderInsensitiveExample {...args} />;
 OrderInsensitive.args = {
   original: ['Vulcan', 'Earth', 'Romulus'],
   modified: ['romulus', 'vulcan', 'earth'],

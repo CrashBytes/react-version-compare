@@ -13,7 +13,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && cp src/styles/Compare.css dist/styles.css",
     "dev": "rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch",

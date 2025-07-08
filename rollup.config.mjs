@@ -31,9 +31,15 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
-      resolve(),
+      resolve({
+        preferBuiltins: false,
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
+      }),
       commonjs(),
-      postcss(),
+      postcss({
+        extract: 'styles.css',
+        minimize: true,
+      }),
       typescript({ tsconfig: './tsconfig.json', declaration: false }),
       babel({
         babelHelpers: 'bundled',
@@ -49,6 +55,16 @@ export default [
   {
     input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
-    plugins: [dts()],
+    plugins: [
+      postcss({
+        extract: false,
+        inject: false,
+      }),
+      dts(),
+    ],
+    external: [
+      ...Object.keys(pkg.peerDependencies || {}),
+      ...Object.keys(pkg.dependencies || {}),
+    ],
   },
 ];
