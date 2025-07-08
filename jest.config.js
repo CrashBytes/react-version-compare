@@ -24,11 +24,20 @@ module.exports = {
     '<rootDir>/src/**/__tests__/**/*.(ts|tsx|js)',
     '<rootDir>/src/**/*.(test|spec).(ts|tsx|js)'
   ],
+  collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.(ts|tsx)',
+    'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
     '!src/index.ts'
   ],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100
+    }
+  },
   transformIgnorePatterns: [
     'node_modules/(?!(.*\\.mjs$))'
   ]
