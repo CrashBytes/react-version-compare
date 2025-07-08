@@ -1,5 +1,5 @@
-// src/index.ts
-import VersionCompare, { VersionCompareProps, VersionData } from './components/VersionCompare';
+import Compare, { CompareProps } from './components/Compare';
 
-export { VersionCompare, VersionCompareProps, VersionData };
-export default VersionCompare;
+export { Compare };
+export type { CompareProps };
+export default Compare;

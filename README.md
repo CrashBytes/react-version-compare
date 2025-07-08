@@ -1,19 +1,19 @@
-# React Version Compare
+# React Compare
 
-A React component for comparing different versions of content with a side-by-side or unified diff view. Features include smart diffing for various content types (JSON, text, code), line numbers, version selection, and highlighted changes.
+A React component for comparing strings and arrays with precise word-level and item-level highlighting of differences.
 
 [![npm version](https://badge.fury.io/js/react-version-compare.svg)](https://badge.fury.io/js/react-version-compare)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 ## Features
 
-- 📊 **Multiple View Modes**: Side-by-side and unified diff views
-- 🎯 **Content Type Support**: Text, JSON, code, and word-level diffing
-- 🔢 **Line Numbers**: Optional line numbering for better navigation
-- 🎨 **Highlighted Changes**: Clear visual indicators for additions and deletions
-- 📱 **Responsive Design**: Works on desktop and mobile devices
+- 🎯 **Precise Highlighting**: Only highlights the actual differences, not entire lines
+- 📝 **String Comparison**: Word-level diff for text content
+- 📋 **Array Comparison**: Item-level diff for arrays of strings
+- 🎨 **Clean Visual Design**: Clear red/green highlighting for changes
+- 📱 **Responsive**: Works on desktop and mobile devices
 - ⚡ **TypeScript Support**: Full TypeScript definitions included
-- 🎛️ **Flexible API**: Customizable props for various use cases
+- 🎛️ **Multiple Views**: Side-by-side or inline comparison modes
 
 ## Installation
 
@@ -27,99 +27,46 @@ yarn add react-version-compare
 
 ## Basic Usage
 
+### String Comparison
+
 ```tsx
 import React from 'react';
-import VersionCompare from 'react-version-compare';
+import Compare from 'react-version-compare';
 import 'react-version-compare/dist/styles.css';
 
 const App = () => {
-  const currentVersion = {
-    id: 'current',
-    name: 'Current Version',
-    content: 'This is the current version of the content.',
-    date: new Date()
-  };
-
-  const previousVersions = [
-    {
-      id: 'v1',
-      name: 'Version 1',
-      content: 'This is an earlier version of the content.',
-      date: new Date(Date.now() - 86400000) // 1 day ago
-    }
-  ];
+  const original = 'I am Captain Kirk, Captain of the USS Enterprise.';
+  const modified = 'I am Captain Picard, Captain of the USS Enterprise.';
 
   return (
-    <VersionCompare 
-      currentVersion={currentVersion}
-      previousVersions={previousVersions}
+    <Compare 
+      original={original}
+      modified={modified}
     />
   );
 };
-
-export default App;
 ```
 
-## Advanced Usage
+**Result**: Only "Kirk" (in red) and "Picard" (in green) will be highlighted.
 
-### JSON Comparison
-
-```tsx
-const jsonCurrent = {
-  id: 'current',
-  content: {
-    name: 'John Doe',
-    age: 30,
-    city: 'New York'
-  }
-};
-
-const jsonPrevious = [{
-  id: 'v1',
-  content: {
-    name: 'John Doe',
-    age: 25,
-    city: 'Boston'
-  }
-}];
-
-<VersionCompare 
-  currentVersion={jsonCurrent}
-  previousVersions={jsonPrevious}
-  contentType="json"
-  viewMode="unified"
-/>
-```
-
-### Code Comparison
+### Array Comparison
 
 ```tsx
-const codeCurrent = {
-  id: 'current',
-  content: `function calculateTotal(items) {
-  return items.reduce((sum, item) => {
-    return sum + item.price * item.quantity;
-  }, 0);
-}`
-};
+const originalArray = [
+  'First item',
+  'Second item', 
+  'Third item'
+];
 
-const codePrevious = [{
-  id: 'v1',
-  content: `function calculateTotal(items) {
-  let total = 0;
-  for (let item of items) {
-    total += item.price;
-  }
-  return total;
-}`
-}];
+const modifiedArray = [
+  'First item',
+  'Modified second item',
+  'Third item'
+];
 
-<VersionCompare 
-  currentVersion={codeCurrent}
-  previousVersions={codePrevious}
-  contentType="code"
-  showLineNumbers={true}
-  enableViewModeToggle={true}
+<Compare 
+  original={originalArray}
+  modified={modifiedArray}
 />
 ```
 
@@ -129,68 +76,78 @@ const codePrevious = [{
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `currentVersion` | `VersionData` | **required** | The current version object |
-| `previousVersions` | `VersionData[]` | **required** | Array of previous version objects |
-| `onVersionSelect` | `(versionId: string) => void` | `undefined` | Callback when a version is selected |
-| `filterVersions` | `boolean` | `false` | Whether to filter versions by changed sections |
-| `sectionId` | `string` | `undefined` | ID of the section being compared (for filtering) |
-| `contentType` | `'text' \| 'json' \| 'code' \| 'word'` | `'text'` | Type of content for optimal diffing |
-| `viewMode` | `'side-by-side' \| 'unified'` | `'side-by-side'` | How to display the diff |
+| `original` | `string \| string[]` | **required** | The original content |
+| `modified` | `string \| string[]` | **required** | The modified content |
+| `viewMode` | `'side-by-side' \| 'inline'` | `'side-by-side'` | How to display the comparison |
 | `className` | `string` | `''` | Custom CSS class name |
-| `showLineNumbers` | `boolean` | `true` | Whether to show line numbers |
-| `enableViewModeToggle` | `boolean` | `true` | Whether to enable the view mode toggle |
 
-### VersionData Interface
+## Examples
 
-```typescript
-interface VersionData {
-  id: string;
-  name?: string;
-  content: string | Record<string, any>;
-  date?: Date | string;
-  changedSections?: string[];
-}
+### Precise Word-Level Highlighting
+
+```tsx
+// Example 1: Minimal changes
+const original = 'I am Captain Kirk, Captain of the USS Enterprise.';
+const modified = 'I am Captain Picard, Captain of the USS Enterprise.';
+// Only "Kirk" → "Picard" highlighted
+
+// Example 2: Multiple changes  
+const original = 'I am Captain Kirk, Captain of the USS Enterprise.';
+const modified = 'I am Commander Benjamin Sisko, Commander of Deep Space 9.';
+// Highlights: "Captain Kirk, Captain of the USS Enterprise" → "Commander Benjamin Sisko, Commander of Deep Space 9"
+```
+
+### Array Comparison
+
+```tsx
+const original = ['Item A', 'Item B', 'Item C'];
+const modified = ['Item A', 'Modified Item B', 'Item C', 'Item D'];
+
+<Compare original={original} modified={modified} />
+```
+
+### Inline View
+
+```tsx
+<Compare 
+  original="Original text"
+  modified="Modified text"
+  viewMode="inline"
+/>
 ```
 
 ## Styling
 
-The component comes with default styles, but you can customize the appearance by overriding the CSS classes:
+The component uses CSS classes that you can customize:
 
 ```css
-.version-compare {
-  /* Main container */
-}
-
-.version-selector {
-  /* Version selection controls */
-}
-
-.comparison-content {
-  /* Diff content area */
+.diff-removed {
+  /* Styling for removed content (red) */
 }
 
 .diff-added {
-  /* Added content styling */
+  /* Styling for added content (green) */
 }
 
-.diff-removed {
-  /* Removed content styling */
+.diff-unchanged {
+  /* Styling for unchanged content */
 }
 ```
 
-## Content Types
+## Use Cases
 
-### Text (`contentType="text"`)
-Line-by-line comparison, ideal for plain text documents.
+- **Document revisions**: Compare different versions of text
+- **Code reviews**: Highlight changes in code snippets  
+- **Content management**: Show edits in articles or posts
+- **Data comparison**: Compare lists or arrays of items
+- **Translation work**: Compare original and translated text
 
-### JSON (`contentType="json"`)
-Smart JSON object comparison that handles nested structures.
+## How It Works
 
-### Code (`contentType="code"`)
-Optimized for source code with syntax-aware diffing.
-
-### Word (`contentType="word"`)
-Word-level comparison for documents where line breaks aren't significant.
+- **String comparison**: Uses word-level diffing to identify precise changes
+- **Array comparison**: Compares items by position and content
+- **Smart highlighting**: Only highlights actual differences, not entire lines
+- **Type safety**: Ensures both inputs are the same type (both strings or both arrays)
 
 ## License
 

@@ -1,7 +1,9 @@
 // example/index.tsx
 import ReactDOM from 'react-dom';
-import VersionCompare from '../src';
-import '../src/styles/VersionCompare.css';
+
+import Compare, { CompareProps } from '../src/components/Compare';
+
+import '../src/styles/Compare.css';
 
 // Example data
 const currentVersion = {
@@ -23,7 +25,7 @@ const previousVersions = [
 ReactDOM.render(
   <div style={{ maxWidth: '1000px', margin: '40px auto', padding: '20px' }}>
     <h1>Version Compare Demo</h1>
-    <VersionCompare 
+    <Compare 
       currentVersion={currentVersion}
       previousVersions={previousVersions}
     />

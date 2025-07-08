@@ -1,7 +1,7 @@
 {
   "name": "react-version-compare",
   "version": "1.0.0",
-  "description": "A React component for comparing different versions of content with a side-by-side or unified diff view. Features include smart diffing for various content types (JSON, text, code), line numbers, version selection, and highlighted changes.",
+  "description": "A React component for comparing strings and arrays with precise word-level and item-level highlighting of differences.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
@@ -17,20 +17,21 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "lint": "eslint src --ext .ts,.tsx",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "demo": "vite",
+    "build-demo": "vite build"
   },
   "keywords": [
     "react",
     "diff",
-    "version",
     "compare",
     "comparison",
     "side-by-side",
-    "unified",
-    "git-diff",
-    "code-diff",
-    "json-diff",
-    "typescript"
+    "word-diff",
+    "array-diff",
+    "typescript",
+    "highlight",
+    "changes"
   ],
   "author": "Your Name <your.email@example.com>",
   "license": "Apache-2.0",
@@ -47,7 +48,8 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "diff": "^8.0.1"
+    "diff": "^8.0.1",
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.27.1",
@@ -64,6 +66,7 @@
     "@types/jest": "^29.5.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.6.0",
     "babel-jest": "^29.7.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
@@ -74,6 +77,7 @@
     "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vite": "^7.0.2"
   }
 }

@@ -1,7 +1,7 @@
 // example/pages/index.tsx
 import { useState } from 'react';
-import VersionCompare from '../../src';
-import '../../src/styles/VersionCompare.css';
+import Compare, { CompareProps } from '../../src/components/Compare';
+import '../../src/styles/Compare.css';
 
 // Example data
 const EXAMPLE_DATA = {
@@ -126,7 +126,7 @@ export default function ExamplePage() {
       </div>
       
       <div className="component-wrapper">
-        <VersionCompare 
+        <Compare 
           currentVersion={data.current}
           previousVersions={data.previous}
           contentType="code"
