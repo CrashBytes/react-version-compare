@@ -18,6 +18,7 @@ The Storybook provides interactive examples for all comparison scenarios. You ca
 - 🎯 **Precise Highlighting**: Only highlights the actual differences, not entire lines
 - 📝 **String Comparison**: Word-level diff for text content
 - 📋 **Array Comparison**: Item-level diff for arrays of strings
+- 📄 **Contentful Rich Text**: Compare Contentful documents with text or structure modes
 - 🎨 **Clean Visual Design**: Clear red/green highlighting for changes
 - 📱 **Responsive**: Works on desktop and mobile devices
 - ⚡ **TypeScript Support**: Full TypeScript definitions included
@@ -78,16 +79,52 @@ const modifiedArray = [
 />
 ```
 
+### Contentful Rich Text Comparison
+
+The component now supports comparing Contentful Rich Text documents with two different modes:
+
+```tsx
+import { Compare } from '@crashbytes/react-version-compare';
+import { Document } from '@contentful/rich-text-types';
+
+// Text mode - extracts plain text for comparison
+<Compare 
+  original={contentfulDoc1}
+  modified={contentfulDoc2}
+  compareMode="text"
+  viewMode="side-by-side"
+/>
+
+// Structure mode - compares document structure
+<Compare 
+  original={contentfulDoc1}
+  modified={contentfulDoc2}
+  compareMode="structure"
+  viewMode="side-by-side"
+/>
+```
+
+**Structure Mode** preserves the semantic meaning of the document by comparing:
+- Headings (with levels)
+- Paragraphs
+- Lists and list items
+- Block quotes
+- And other rich text elements
+
+**Text Mode** extracts plain text content and performs word-level comparison, similar to string comparison.
+
 ## API Reference
 
 ### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `original` | `string \| string[]` | **required** | The original content |
-| `modified` | `string \| string[]` | **required** | The modified content |
+| `original` | `string \| string[] \| Document` | **required** | The original content |
+| `modified` | `string \| string[] \| Document` | **required** | The modified content |
 | `viewMode` | `'side-by-side' \| 'inline'` | `'side-by-side'` | How to display the comparison |
 | `className` | `string` | `''` | Custom CSS class name |
+| `caseSensitive` | `boolean` | `true` | Whether comparison is case sensitive |
+| `compareMode` | `'text' \| 'structure'` | `'text'` | Comparison mode for Contentful documents |
 
 ## Examples
 
@@ -149,13 +186,16 @@ The component uses CSS classes that you can customize:
 - **Content management**: Show edits in articles or posts
 - **Data comparison**: Compare lists or arrays of items
 - **Translation work**: Compare original and translated text
+- **Contentful CMS**: Compare rich text content versions and track editorial changes
+- **Documentation**: Track changes in structured content with semantic meaning
 
 ## How It Works
 
 - **String comparison**: Uses word-level diffing to identify precise changes
 - **Array comparison**: Compares items by position and content
+- **Contentful comparison**: Extracts plain text or compares structural elements
 - **Smart highlighting**: Only highlights actual differences, not entire lines
-- **Type safety**: Ensures both inputs are the same type (both strings or both arrays)
+- **Type safety**: Ensures both inputs are the same type (strings, arrays, or Contentful documents)
 
 ## License
 
