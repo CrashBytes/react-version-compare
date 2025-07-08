@@ -1,0 +1,40 @@
+name: Deploy Storybook to GitHub Pages
+
+on:
+  # This workflow runs on every push to main and can also be triggered manually
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Storybook
+        run: npm run storybook:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+
+# Notes:
+# - This workflow builds and deploys Storybook to the gh-pages branch on every push to main.
+# - The peaceiris/actions-gh-pages action handles pushing the static files to the gh-pages branch.
+# - The publish_dir should match the output directory of your Storybook build (storybook-static by default).
+# - GITHUB_TOKEN is provided automatically by GitHub Actions for authentication.
+# - You can trigger this workflow manually from the Actions tab if needed.
