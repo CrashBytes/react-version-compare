@@ -1,6 +1,7 @@
 name: Publish to NPM
 
 on:
+  # This workflow runs when a GitHub Release is published or manually via the Actions tab
   release:
     types: [published]
   workflow_dispatch:
@@ -44,8 +45,26 @@ jobs:
       
       - name: Build package
         run: npm run build
-      
+
+      # Optional: Auto-increment version if not using GitHub Releases for versioning
+      # - name: Bump version
+      #   run: |
+      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      #     git config --global user.name "github-actions[bot]"
+      #     npm version patch -m "ci: bump version to %s [skip ci]"
+      #     git push --follow-tags
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish to NPM
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+# Notes:
+# - This workflow is triggered by a published GitHub Release or manually.
+# - The "Bump version" step is commented out because with release-based publishing,
+#   the version should be bumped before creating the release. Uncomment if you want
+#   to auto-increment the version on publish (not recommended with release-based flows).
+# - NPM_TOKEN must be set in your repository secrets for publishing to work.
+# - If you want to auto-publish on every push to main, change the 'on:' section accordingly.
