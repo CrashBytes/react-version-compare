@@ -39,8 +39,8 @@ yarn add @crashbytes/react-version-compare
 
 ```tsx
 import React from 'react';
-import Compare from 'react-version-compare';
-import 'react-version-compare/dist/styles.css';
+import Compare from '@crashbytes/react-version-compare';
+import '@crashbytes/react-version-compare/dist/styles.css';
 
 const App = () => {
   const original = 'I am Captain Kirk, Captain of the USS Enterprise.';
