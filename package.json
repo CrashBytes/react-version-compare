@@ -1,10 +1,13 @@
 {
-  "name": "react-version-compare",
+  "name": "@crashbytes/react-version-compare",
   "version": "1.0.0",
   "description": "A React component for comparing strings and arrays with precise word-level and item-level highlighting of differences.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "README.md"
