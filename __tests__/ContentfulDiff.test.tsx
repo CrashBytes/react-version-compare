@@ -5,8 +5,8 @@ import {
   extractStructuredContent,
   isContentfulDocument,
   renderContentfulDiff,
-} from '../src/components/contentfulDiff';
-import { originalRichText, modifiedRichText } from '../__mocks__/richtext.mock';
+} from '@components/contentfulDiff';
+import { originalRichText, modifiedRichText } from '@mocks/richtext.mock';
 import type { Document } from '@contentful/rich-text-types';
 
 describe('contentfulDiff utilities', () => {
@@ -26,23 +26,23 @@ describe('contentfulDiff utilities', () => {
     expect(text).toBe('');
   });
 
-it('extractStructuredContent returns structure array with all types', () => {
-  const structure = extractStructuredContent(originalRichText);
-  expect(Array.isArray(structure)).toBe(true);
-  expect(structure.some(s => s.type === 'Heading' && s.content.includes('The Fellowship of the Ring'))).toBe(true);
-  expect(structure.some(s => s.type === 'List Item' && s.content.includes('Frodo Baggins'))).toBe(true);
-  expect(structure.some(s => s.type === 'List Item' && s.content.includes('Gandalf the Grey'))).toBe(true);
-  expect(structure.some(s => s.type === 'List Item' && s.content.includes('Legolas Greenleaf'))).toBe(true);
-  expect(structure.some(s => s.type === 'Quote' && s.content.includes('Even the smallest person'))).toBe(true);
-  expect(structure.some(s => s.type && s.type.toLowerCase().includes('tabl'))).toBe(true);
-  expect(structure.some(s => s.type === 'Text' && s.content.includes('Not all those who wander are lost.'))).toBe(true);
-  expect(structure.some(s => s.type === 'Text' && s.content.includes('I am no man!'))).toBe(true);
-  expect(structure.some(s => s.type === 'Text' && s.content.includes('One Ring to rule them all'))).toBe(true);
-  expect(structure.some(s => s.type === 'Text' && s.content.includes('All we have to decide is what to do with the time that is given us.'))).toBe(true);
-  expect(structure.some(s => s.type === 'Text' && s.content.includes('You shall not pass!'))).toBe(true);
-  expect(structure.some(s => s.type === 'Text' && s.content.includes('There is some good in this world'))).toBe(true);
-  expect(structure.some(s => s.type === 'Hyperlink' && s.content.includes('The Council of Elrond'))).toBe(true);
-});
+  it('extractStructuredContent returns structure array with all types', () => {
+    const structure = extractStructuredContent(originalRichText);
+    expect(Array.isArray(structure)).toBe(true);
+    expect(structure.some(s => s.type === 'Heading' && s.content.includes('The Fellowship of the Ring'))).toBe(true);
+    expect(structure.some(s => s.type === 'List Item' && s.content.includes('Frodo Baggins'))).toBe(true);
+    expect(structure.some(s => s.type === 'List Item' && s.content.includes('Gandalf the Grey'))).toBe(true);
+    expect(structure.some(s => s.type === 'List Item' && s.content.includes('Legolas Greenleaf'))).toBe(true);
+    expect(structure.some(s => s.type === 'Quote' && s.content.includes('Even the smallest person'))).toBe(true);
+    expect(structure.some(s => s.type && s.type.toLowerCase().includes('tabl'))).toBe(true);
+    expect(structure.some(s => s.type === 'Text' && s.content.includes('Not all those who wander are lost.'))).toBe(true);
+    expect(structure.some(s => s.type === 'Text' && s.content.includes('I am no man!'))).toBe(true);
+    expect(structure.some(s => s.type === 'Text' && s.content.includes('One Ring to rule them all'))).toBe(true);
+    expect(structure.some(s => s.type === 'Text' && s.content.includes('All we have to decide is what to do with the time that is given us.'))).toBe(true);
+    expect(structure.some(s => s.type === 'Text' && s.content.includes('You shall not pass!'))).toBe(true);
+    expect(structure.some(s => s.type === 'Text' && s.content.includes('There is some good in this world'))).toBe(true);
+    expect(structure.some(s => s.type === 'Hyperlink' && s.content.includes('The Council of Elrond'))).toBe(true);
+  });
 
   it('extractStructuredContent returns empty array for invalid doc', () => {
     const structure = extractStructuredContent({} as Document);
@@ -56,8 +56,8 @@ it('extractStructuredContent returns structure array with all types', () => {
     expect(isContentfulDocument('notadoc')).toBe(false);
   });
 
-  it('renderContentfulDiff (text mode) returns diff parts for all types', () => {
-    const { originalParts, modifiedParts } = renderContentfulDiff(
+  it('renderContentfulDiff (text mode) returns diff parts for all types', async () => {
+    const { originalParts, modifiedParts } = await renderContentfulDiff(
       originalRichText,
       modifiedRichText,
       'text',
@@ -70,8 +70,8 @@ it('extractStructuredContent returns structure array with all types', () => {
     expect(modifiedParts.some(part => typeof part === 'object')).toBe(true);
   });
 
-  it('renderContentfulDiff (structure mode) returns diff parts for all types', () => {
-    const { originalParts, modifiedParts } = renderContentfulDiff(
+  it('renderContentfulDiff (structure mode) returns diff parts for all types', async () => {
+    const { originalParts, modifiedParts } = await renderContentfulDiff(
       originalRichText,
       modifiedRichText,
       'structure',
@@ -84,8 +84,8 @@ it('extractStructuredContent returns structure array with all types', () => {
     expect(modifiedParts.some(part => typeof part === 'object')).toBe(true);
   });
 
-  it('renderContentfulDiff returns empty arrays for invalid docs', () => {
-    const { originalParts, modifiedParts } = renderContentfulDiff(
+  it('renderContentfulDiff returns empty arrays for invalid docs', async () => {
+    const { originalParts, modifiedParts } = await renderContentfulDiff(
       {} as Document,
       {} as Document,
       'structure',
@@ -98,8 +98,8 @@ it('extractStructuredContent returns structure array with all types', () => {
     expect(modifiedParts.length).toBe(0);
   });
 
-  it('renderContentfulDiff falls back to text mode for unknown compareMode', () => {
-    const { originalParts, modifiedParts } = renderContentfulDiff(
+  it('renderContentfulDiff falls back to text mode for unknown compareMode', async () => {
+    const { originalParts, modifiedParts } = await renderContentfulDiff(
       originalRichText,
       modifiedRichText,
       'unknown' as any,

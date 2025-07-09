@@ -121,6 +121,18 @@ export const Compare: React.FC<CompareProps> = ({
     }
   }
 
+  if (
+    !isStringComparison &&
+    !isArrayComparison &&
+    !isContentfulComparison
+  ) {
+    return (
+      <div className={`compare-error ${className}`}>
+        Error: Invalid input for comparison.
+      </div>
+    );
+  }
+
   if (viewMode === 'inline') {
     return (
       <div className={`compare-inline ${className}`}>
@@ -131,6 +143,7 @@ export const Compare: React.FC<CompareProps> = ({
       </div>
     );
   }
+  
 
   return (
     <div className={`compare-side-by-side ${className}`}>
