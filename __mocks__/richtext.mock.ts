@@ -40,7 +40,7 @@ export const originalRichText: Document = {
       data: {}
     },
     {
-      nodeType: 'hyperlink',
+      nodeType: 'hyperlink' as any,
       content: [{ nodeType: 'text', value: 'The Council of Elrond', marks: [], data: {} }],
       data: { uri: 'https://lotr.fandom.com/wiki/Council_of_Elrond' }
     },
@@ -55,6 +55,11 @@ export const originalRichText: Document = {
         {
           nodeType: BLOCKS.LIST_ITEM,
           content: [{ nodeType: 'text', value: 'Samwise Gamgee', marks: [], data: {} }],
+          data: {}
+        },
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Legolas Greenleaf', marks: [], data: {} }],
           data: {}
         }
       ],
@@ -77,11 +82,6 @@ export const originalRichText: Document = {
       data: {}
     },
     {
-      nodeType: BLOCKS.LIST_ITEM,
-      content: [{ nodeType: 'text', value: 'Legolas Greenleaf', marks: [], data: {} }],
-      data: {}
-    },
-    {
       nodeType: BLOCKS.QUOTE,
       content: [{ nodeType: 'text', value: 'Even the smallest person can change the course of the future.', marks: [], data: {} }],
       data: {}
@@ -90,15 +90,15 @@ export const originalRichText: Document = {
       nodeType: BLOCKS.TABLE,
       content: [
         {
-          nodeType: 'table-row',
+          nodeType: BLOCKS.TABLE_ROW,
           content: [
             {
-              nodeType: 'table-cell',
+              nodeType: BLOCKS.TABLE_CELL,
               content: [{ nodeType: 'text', value: 'Gimli', marks: [], data: {} }],
               data: {}
             },
             {
-              nodeType: 'table-cell',
+              nodeType: BLOCKS.TABLE_CELL,
               content: [{ nodeType: 'text', value: 'Boromir', marks: [], data: {} }],
               data: {}
             }
@@ -176,7 +176,7 @@ export const modifiedRichText: Document = {
       data: {}
     },
     {
-      nodeType: 'hyperlink',
+      nodeType: 'hyperlink' as any,
       content: [{ nodeType: 'text', value: 'The Council of Elrond', marks: [], data: {} }],
       data: { uri: 'https://lotr.fandom.com/wiki/Council_of_Elrond' }
     },
@@ -191,6 +191,11 @@ export const modifiedRichText: Document = {
         {
           nodeType: BLOCKS.LIST_ITEM,
           content: [{ nodeType: 'text', value: 'Samwise Gamgee (Updated)', marks: [], data: {} }],
+          data: {}
+        },
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Legolas Greenleaf (Updated)', marks: [], data: {} }],
           data: {}
         }
       ],
@@ -213,11 +218,6 @@ export const modifiedRichText: Document = {
       data: {}
     },
     {
-      nodeType: BLOCKS.LIST_ITEM,
-      content: [{ nodeType: 'text', value: 'Legolas Greenleaf (Updated)', marks: [], data: {} }],
-      data: {}
-    },
-    {
       nodeType: BLOCKS.QUOTE,
       content: [{ nodeType: 'text', value: 'Even the smallest person can change the course of the future. (Updated)', marks: [], data: {} }],
       data: {}
@@ -226,15 +226,15 @@ export const modifiedRichText: Document = {
       nodeType: BLOCKS.TABLE,
       content: [
         {
-          nodeType: 'table-row',
+          nodeType: BLOCKS.TABLE_ROW,
           content: [
             {
-              nodeType: 'table-cell',
+              nodeType: BLOCKS.TABLE_CELL,
               content: [{ nodeType: 'text', value: 'Gimli', marks: [], data: {} }],
               data: {}
             },
             {
-              nodeType: 'table-cell',
+              nodeType: BLOCKS.TABLE_CELL,
               content: [{ nodeType: 'text', value: 'Boromir (Updated)', marks: [], data: {} }],
               data: {}
             }
