@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rollup -c && cp src/styles/Compare.css dist/styles.css",
     "dev": "rollup -c -w",
-    "test": "jest",
+    "test": "jest --no-coverage",
+    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",

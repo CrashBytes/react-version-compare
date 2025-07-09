@@ -5,52 +5,132 @@ export const originalRichText: Document = {
   data: {},
   content: [
     {
+      nodeType: BLOCKS.HEADING_1,
+      content: [{ nodeType: 'text', value: 'The Fellowship of the Ring', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_2,
+      content: [{ nodeType: 'text', value: 'The Two Towers', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_3,
+      content: [{ nodeType: 'text', value: 'The Return of the King', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_4,
+      content: [{ nodeType: 'text', value: 'The Shire', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_5,
+      content: [{ nodeType: 'text', value: 'Rivendell', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_6,
+      content: [{ nodeType: 'text', value: 'Mordor', marks: [], data: {} }],
+      data: {}
+    },
+    {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'Test this paragraph 1', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'One Ring to rule them all, One Ring to find them.', marks: [], data: {} }],
       data: {}
     },
     {
       nodeType: 'hyperlink',
-      content: [
-        { nodeType: 'text', value: 'type', marks: [], data: {} }
-      ],
-      data: { uri: 'https://example.com' }
+      content: [{ nodeType: 'text', value: 'The Council of Elrond', marks: [], data: {} }],
+      data: { uri: 'https://lotr.fandom.com/wiki/Council_of_Elrond' }
     },
     {
-      nodeType: BLOCKS.PARAGRAPH,
+      nodeType: BLOCKS.UL_LIST,
       content: [
-        { nodeType: 'text', value: 'this is paragraph', marks: [], data: {} }
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Frodo Baggins', marks: [], data: {} }],
+          data: {}
+        },
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Samwise Gamgee', marks: [], data: {} }],
+          data: {}
+        }
+      ],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.OL_LIST,
+      content: [
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Gandalf the Grey', marks: [], data: {} }],
+          data: {}
+        },
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Aragorn son of Arathorn', marks: [], data: {} }],
+          data: {}
+        }
+      ],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.LIST_ITEM,
+      content: [{ nodeType: 'text', value: 'Legolas Greenleaf', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.QUOTE,
+      content: [{ nodeType: 'text', value: 'Even the smallest person can change the course of the future.', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.TABLE,
+      content: [
+        {
+          nodeType: 'table-row',
+          content: [
+            {
+              nodeType: 'table-cell',
+              content: [{ nodeType: 'text', value: 'Gimli', marks: [], data: {} }],
+              data: {}
+            },
+            {
+              nodeType: 'table-cell',
+              content: [{ nodeType: 'text', value: 'Boromir', marks: [], data: {} }],
+              data: {}
+            }
+          ],
+          data: {}
+        }
       ],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'As you’re deciding what to bring on your trip to Mackinac Island and the beautiful Great Lakes, we have a few suggestions for you.', marks: [{ type: 'bold' }], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'Not all those who wander are lost.', marks: [], data: {} }],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'hepp', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'All we have to decide is what to do with the time that is given us.', marks: [{ type: 'bold' }], data: {} }],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'Most of the tour is “smart casual.” Khakis, slacks, polo shirts and cotton tops are all appropriate. However, at the timeless Grand Hotel, an old-fashioned sensibility still defines the atmosphere. Eveningwear is required in all public areas of the hotel after 6:30 p.m. Ladies’ evening wear includes a dress, skirt and blouse, or a pantsuit. Eveningwear for gentlemen includes a suit or sport coat, a necktie and dress slacks—please, no denim.', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'You shall not pass!', marks: [], data: {} }],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'We recommend dressing in layers. It’s much easier to maintain a level of comfort if you can add or remove a layer at a time. So always bring a light jacket or sweater. Fleece or wool is best. We recommend staying away from cotton sweaters or jackets as they won’t keep', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'There is some good in this world, and it’s worth fighting for.', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.PARAGRAPH,
+      content: [{ nodeType: 'text', value: 'I am no man!', marks: [], data: {} }],
       data: {}
     }
   ]
@@ -61,59 +141,132 @@ export const modifiedRichText: Document = {
   data: {},
   content: [
     {
+      nodeType: BLOCKS.HEADING_1,
+      content: [{ nodeType: 'text', value: 'The Fellowship of the Ring (Updated)', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_2,
+      content: [{ nodeType: 'text', value: 'The Two Towers', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_3,
+      content: [{ nodeType: 'text', value: 'The Return of the King', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_4,
+      content: [{ nodeType: 'text', value: 'The Shire', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_5,
+      content: [{ nodeType: 'text', value: 'Rivendell', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.HEADING_6,
+      content: [{ nodeType: 'text', value: 'Mordor', marks: [], data: {} }],
+      data: {}
+    },
+    {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'Test this paragraph 1', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'One Ring to rule them all, One Ring to find them. (Updated)', marks: [], data: {} }],
       data: {}
     },
     {
       nodeType: 'hyperlink',
-      content: [
-        { nodeType: 'text', value: 'type', marks: [], data: {} }
-      ],
-      data: { uri: 'https://example.com' }
+      content: [{ nodeType: 'text', value: 'The Council of Elrond', marks: [], data: {} }],
+      data: { uri: 'https://lotr.fandom.com/wiki/Council_of_Elrond' }
     },
     {
-      nodeType: BLOCKS.PARAGRAPH,
+      nodeType: BLOCKS.UL_LIST,
       content: [
-        { nodeType: 'text', value: 'this is paragraph', marks: [], data: {} }
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Frodo Baggins', marks: [], data: {} }],
+          data: {}
+        },
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Samwise Gamgee (Updated)', marks: [], data: {} }],
+          data: {}
+        }
+      ],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.OL_LIST,
+      content: [
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Gandalf the White', marks: [], data: {} }],
+          data: {}
+        },
+        {
+          nodeType: BLOCKS.LIST_ITEM,
+          content: [{ nodeType: 'text', value: 'Aragorn son of Arathorn', marks: [], data: {} }],
+          data: {}
+        }
+      ],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.LIST_ITEM,
+      content: [{ nodeType: 'text', value: 'Legolas Greenleaf (Updated)', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.QUOTE,
+      content: [{ nodeType: 'text', value: 'Even the smallest person can change the course of the future. (Updated)', marks: [], data: {} }],
+      data: {}
+    },
+    {
+      nodeType: BLOCKS.TABLE,
+      content: [
+        {
+          nodeType: 'table-row',
+          content: [
+            {
+              nodeType: 'table-cell',
+              content: [{ nodeType: 'text', value: 'Gimli', marks: [], data: {} }],
+              data: {}
+            },
+            {
+              nodeType: 'table-cell',
+              content: [{ nodeType: 'text', value: 'Boromir (Updated)', marks: [], data: {} }],
+              data: {}
+            }
+          ],
+          data: {}
+        }
       ],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'As you’re deciding what to bring on your trip to Mackinac Island Island and the beautiful beautiful Great Lakes, we have a few suggestions for you.', marks: [{ type: 'bold' }], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'Not all those who wander are lost.', marks: [], data: {} }],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'hep', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'All we have to decide is what to do with the time that is given us.', marks: [{ type: 'bold' }], data: {} }],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'trying to trip up the semantic compare', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'You shall not pass!', marks: [], data: {} }],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'Most of the tour is “smart casual.” Khakis, slacks, polo shirts and cotton tops are all appropriate. However, at the timeless Grand Hotel, an old-fashioned sensibility still defines the atmosphere. Eveningwear is required in all public areas of the hotel after 6:30 p.m. Ladies’ evening wear includes a dress, skirt and blouse, or a pantsuit. Eveningwear for gentlemen includes a suit or sport coat, a necktie and dress slacks—please, no denim.', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'There is some good in this world, and it’s worth fighting for. (Updated)', marks: [], data: {} }],
       data: {}
     },
     {
       nodeType: BLOCKS.PARAGRAPH,
-      content: [
-        { nodeType: 'text', value: 'We recommend dressing in layers. It’s much easier to maintain a level of comfort if you can add or remove a layer at a time. So always bring a light jacket or sweater. Fleece or wool is best. We recommend staying away from cotton sweaters or jackets as they won’t keep', marks: [], data: {} }
-      ],
+      content: [{ nodeType: 'text', value: 'I am no man!', marks: [], data: {} }],
       data: {}
     }
   ]

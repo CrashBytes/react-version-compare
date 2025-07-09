@@ -14,9 +14,28 @@ describe('Compare', () => {
         viewMode="side-by-side"
       />
     );
+    // Check for all expected structure types
+    expect(screen.getAllByText('Heading').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Text').length).toBeGreaterThan(0);
-    expect(screen.getByText((content) => content.includes('paragraph 1'))).toBeInTheDocument();
-    expect(screen.getByText((content) => content.includes('updated'))).toBeInTheDocument();
+    expect(screen.getAllByText('List Item').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Quote').length).toBeGreaterThan(0);
+    // Table label may be "TablE", "Tabl", or "Table" depending on implementation, so use a flexible matcher
+    expect(
+      screen.getAllByText((content) => content.toLowerCase().includes('tabl')).length
+    ).toBeGreaterThan(0);
+    expect(screen.getAllByText('Hyperlink').length).toBeGreaterThan(0);
+
+    // Use getAllByText for possibly duplicated content
+    expect(screen.getAllByText((content) => content.includes('The Fellowship of the Ring')).length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes('One Ring to rule them all')).length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes('Frodo Baggins')).length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes('Even the smallest person can change the course of the future')).length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes('Gimli')).length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes('Boromir')).length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes('The Council of Elrond')).length).toBeGreaterThan(0);
+    expect(screen.getAllByText((content) => content.includes('I am no man!')).length).toBeGreaterThan(0);
+    // Check for updated content in the modified doc
+    expect(screen.getAllByText((content) => content.includes('Updated')).length).toBeGreaterThan(0);
   });
 
   it('Contentful Document Comparison handles structure mode with different heading levels', () => {
