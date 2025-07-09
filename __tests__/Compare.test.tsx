@@ -5,7 +5,7 @@ import { Compare } from '../src/components/Compare';
 import { originalRichText, modifiedRichText } from '../__mocks__/richtext.mock';
 
 describe('Compare', () => {
-  it('Contentful Document Comparison handles structure mode with word-level changes in same element type', () => {
+  it('Contentful Document Comparison handles structure mode with word-level changes in same element type', async () => {
     render(
       <Compare
         original={originalRichText}
@@ -14,31 +14,46 @@ describe('Compare', () => {
         viewMode="side-by-side"
       />
     );
-    // Check for all expected structure types
-    expect(screen.getAllByText('Heading').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Text').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('List Item').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Quote').length).toBeGreaterThan(0);
-    // Table label may be "TablE", "Tabl", or "Table" depending on implementation, so use a flexible matcher
+    // Wait for async diff to finish
+    expect(await screen.findAllByText('Heading')).not.toHaveLength(0);
+    expect(await screen.findAllByText('Text')).not.toHaveLength(0);
+    expect(await screen.findAllByText('List Item')).not.toHaveLength(0);
+    expect(await screen.findAllByText('Quote')).not.toHaveLength(0);
     expect(
-      screen.getAllByText((content) => content.toLowerCase().includes('tabl')).length
+      (await screen.findAllByText((content) => content.toLowerCase().includes('tabl'))).length
     ).toBeGreaterThan(0);
-    expect(screen.getAllByText('Hyperlink').length).toBeGreaterThan(0);
+    expect(await screen.findAllByText('Hyperlink')).not.toHaveLength(0);
 
-    // Use getAllByText for possibly duplicated content
-    expect(screen.getAllByText((content) => content.includes('The Fellowship of the Ring')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('One Ring to rule them all')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('Frodo Baggins')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('Even the smallest person can change the course of the future')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('Gimli')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('Boromir')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('The Council of Elrond')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('I am no man!')).length).toBeGreaterThan(0);
-    // Check for updated content in the modified doc
-    expect(screen.getAllByText((content) => content.includes('Updated')).length).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('The Fellowship of the Ring'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('One Ring to rule them all'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('Frodo Baggins'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('Even the smallest person can change the course of the future'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('Gimli'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('Boromir'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('The Council of Elrond'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('I am no man!'))).length
+    ).toBeGreaterThan(0);
+    expect(
+      (await screen.findAllByText((content) => content.includes('Updated'))).length
+    ).toBeGreaterThan(0);
   });
 
-  it('Contentful Document Comparison handles structure mode with different heading levels', () => {
+  it('Contentful Document Comparison handles structure mode with different heading levels', async () => {
     const origDoc = {
       ...originalRichText,
       content: [
@@ -85,9 +100,9 @@ describe('Compare', () => {
         viewMode="side-by-side"
       />
     );
-    expect(screen.getAllByText('Heading').length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('Main Title')).length).toBeGreaterThan(0);
-    expect(screen.getAllByText((content) => content.includes('Subtitle')).length).toBeGreaterThan(0);
+    expect((await screen.findAllByText('Heading')).length).toBeGreaterThan(0);
+    expect((await screen.findAllByText((content) => content.includes('Main Title'))).length).toBeGreaterThan(0);
+    expect((await screen.findAllByText((content) => content.includes('Subtitle'))).length).toBeGreaterThan(0);
   });
 
   it('handles string comparison', () => {
