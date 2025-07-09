@@ -3,6 +3,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Compare } from '../src/components/Compare';
 import { originalRichText, modifiedRichText } from '../__mocks__/richtext.mock';
+import { BLOCKS, type Document, type TopLevelBlock } from '@contentful/rich-text-types';
 
 describe('Compare', () => {
   it('Contentful Document Comparison handles structure mode with word-level changes in same element type', async () => {
@@ -54,43 +55,43 @@ describe('Compare', () => {
   });
 
   it('Contentful Document Comparison handles structure mode with different heading levels', async () => {
-    const origDoc = {
+    const origDoc: Document = {
       ...originalRichText,
       content: [
         {
-          nodeType: 'heading-1',
+          nodeType: BLOCKS.HEADING_1,
           content: [
             { nodeType: 'text', value: 'Main Title', marks: [], data: {} }
           ],
           data: {}
         },
         {
-          nodeType: 'heading-2',
+          nodeType: BLOCKS.HEADING_2,
           content: [
             { nodeType: 'text', value: 'Subtitle', marks: [], data: {} }
           ],
           data: {}
         }
-      ]
+      ] as TopLevelBlock[]
     };
-    const modDoc = {
+    const modDoc: Document = {
       ...modifiedRichText,
       content: [
         {
-          nodeType: 'heading-1',
+          nodeType: BLOCKS.HEADING_1,
           content: [
             { nodeType: 'text', value: 'Main Title', marks: [], data: {} }
           ],
           data: {}
         },
         {
-          nodeType: 'heading-2',
+          nodeType: BLOCKS.HEADING_2,
           content: [
             { nodeType: 'text', value: 'Updated Subtitle', marks: [], data: {} }
           ],
           data: {}
         }
-      ]
+      ] as TopLevelBlock[]
     };
     render(
       <Compare
