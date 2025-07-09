@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Compare } from '../components/Compare';
+import Compare from '../components/Compare';
 import { originalRichText, modifiedRichText } from '../../__mocks__/richtext.mock';
-
-// Use the mocks from __mocks__/richtext.mock.ts for realistic stories
 
 const meta: Meta<typeof Compare> = {
   title: 'Compare/Contentful Rich Text',

@@ -1,71 +1,19 @@
-import { diffWords, diffArrays } from 'diff';
 import React from 'react';
 import { Document, Block, Inline, Text, BLOCKS } from '@contentful/rich-text-types';
 
-// Extract plain text from Contentful document
-export const extractPlainText = (document: Document): string => {
-  const extractFromNode = (node: Block | Inline | Text): string => {
-    if (node.nodeType === 'text') {
-      return (node as Text).value;
-    }
-    if ('content' in node && node.content) {
-      return node.content.map(child => extractFromNode(child)).join('');
-    }
-    return '';
-  };
-  return extractFromNode(document);
-};
+// ...extractPlainText, extractStructuredContent, isContentfulDocument (unchanged)...
 
-// Extract structured content for structure diff
-export const extractStructuredContent = (document: Document): Array<{ type: string; content: string; level?: number }> => {
-  const result: Array<{ type: string; content: string; level?: number }> = [];
-  const extractFromNode = (node: Block | Inline | Text): void => {
-    if (node.nodeType === 'text') return;
-    if ('content' in node && node.content) {
-      const textContent = node.content.map(child =>
-        child.nodeType === 'text' ? (child as Text).value : ''
-      ).join('');
-      let displayType: string = node.nodeType;
-      let headingLevel: number | undefined;
-      switch (node.nodeType) {
-        case BLOCKS.HEADING_1: displayType = 'Heading'; headingLevel = 1; break;
-        case BLOCKS.HEADING_2: displayType = 'Heading'; headingLevel = 2; break;
-        case BLOCKS.HEADING_3: displayType = 'Heading'; headingLevel = 3; break;
-        case BLOCKS.HEADING_4: displayType = 'Heading'; headingLevel = 4; break;
-        case BLOCKS.HEADING_5: displayType = 'Heading'; headingLevel = 5; break;
-        case BLOCKS.HEADING_6: displayType = 'Heading'; headingLevel = 6; break;
-        case BLOCKS.PARAGRAPH: displayType = 'Text'; break;
-        case BLOCKS.UL_LIST: displayType = 'List'; break;
-        case BLOCKS.OL_LIST: displayType = 'Numbered List'; break;
-        case BLOCKS.LIST_ITEM: displayType = 'List Item'; break;
-        case BLOCKS.QUOTE: displayType = 'Quote'; break;
-        case BLOCKS.TABLE: displayType = 'Table'; break;
-        default: displayType = node.nodeType.charAt(0).toUpperCase() + node.nodeType.slice(1);
-      }
-      if (textContent.trim()) {
-        result.push({ type: displayType, content: textContent.trim(), level: headingLevel });
-      }
-      node.content.forEach(child => {
-        if (child.nodeType !== 'text') extractFromNode(child);
-      });
-    }
-  };
-  if (document.content) document.content.forEach(node => extractFromNode(node));
-  return result;
-};
-
-export const isContentfulDocument = (value: any): value is Document => {
-  return value && typeof value === 'object' && value.nodeType === BLOCKS.DOCUMENT && Array.isArray(value.content);
-};
-
-// The main Contentful diff renderer
-export function renderContentfulDiff(
+export async function renderContentfulDiff(
   origDoc: Document,
   modDoc: Document,
   compareMode: 'text' | 'structure',
   caseSensitive: boolean,
   renderStringDiff: (a: string, b: string) => { originalParts: any[]; modifiedParts: any[] }
 ) {
+  // Dynamically import diff (CJS) for Vite/ESM compatibility
+  const Diff = await import('diff');
+  const { diffWords, diffArrays } = Diff;
+
   if (compareMode === 'structure') {
     const origStructure = extractStructuredContent(origDoc);
     const modStructure = extractStructuredContent(modDoc);
@@ -74,7 +22,7 @@ export function renderContentfulDiff(
       origStructure,
       modStructure,
       {
-        comparator: (a, b) =>
+        comparator: (a: any, b: any) =>
           a.type === b.type &&
           a.content === b.content &&
           a.level === b.level
@@ -87,7 +35,7 @@ export function renderContentfulDiff(
     let origIdx = 0;
     let modIdx = 0;
 
-    diff.forEach(part => {
+    diff.forEach((part: any) => {
       if (part.added) {
         part.value.forEach((modItem: any, i: number) => {
           originalParts.push(

@@ -4,13 +4,13 @@ import {
   isContentfulDocument,
   renderContentfulDiff
 } from './contentfulDiff';
+import diff from 'diff';
 
 function renderStringDiff(orig: string, mod: string) {
-  const { diffWords } = require('diff');
-  const diff = diffWords(orig, mod);
+  const difference = diff.diffWords(orig, mod);
   const originalParts: any[] = [];
   const modifiedParts: any[] = [];
-  for (const part of diff) {
+  for (const part of difference) {
     if (part.removed) {
       originalParts.push(
         <span key={originalParts.length} className="diff-removed">
