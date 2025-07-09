@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Document } from '@contentful/rich-text-types';
 import {
   isContentfulDocument,
   renderContentfulDiff
 } from './contentfulDiff';
-import diff from 'diff';
+import * as Diff from 'diff';
 
 function renderStringDiff(orig: string, mod: string) {
-  const difference = diff.diffWords(orig, mod);
+  const difference = Diff.diffWords(orig, mod);
   const originalParts: any[] = [];
   const modifiedParts: any[] = [];
   for (const part of difference) {
@@ -86,30 +86,39 @@ export const Compare: React.FC<CompareProps> = ({
   const isArrayComparison = Array.isArray(original) && Array.isArray(modified);
   const isContentfulComparison = isContentfulDocument(original) && isContentfulDocument(modified);
 
-  if (!isStringComparison && !isArrayComparison && !isContentfulComparison) {
-    return (
-      <div className={`compare-error ${className}`}>
-        Error: Both inputs must be either strings, arrays of strings, or Contentful documents
-      </div>
-    );
-  }
+  const [contentfulParts, setContentfulParts] = useState<{ originalParts: any[]; modifiedParts: any[] } | null>(null);
 
-  let originalParts: any[], modifiedParts: any[];
+  useEffect(() => {
+    let cancelled = false;
+    if (isContentfulComparison) {
+      setContentfulParts(null); // reset while loading
+      renderContentfulDiff(
+        original as Document,
+        modified as Document,
+        compareMode,
+        caseSensitive,
+        renderStringDiff
+      ).then(result => {
+        if (!cancelled) setContentfulParts(result);
+      });
+    }
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [original, modified, compareMode, caseSensitive, isContentfulComparison]);
+
+  let originalParts: any[] = [], modifiedParts: any[] = [];
   if (isStringComparison) {
     ({ originalParts, modifiedParts } = renderStringDiff(original as string, modified as string));
   } else if (isArrayComparison) {
     ({ originalParts, modifiedParts } = renderArrayDiff(original as string[], modified as string[]));
   } else if (isContentfulComparison) {
-    ({ originalParts, modifiedParts } = renderContentfulDiff(
-      original as Document,
-      modified as Document,
-      compareMode,
-      caseSensitive,
-      renderStringDiff
-    ));
-  } else {
-    originalParts = [];
-    modifiedParts = [];
+    if (contentfulParts) {
+      originalParts = contentfulParts.originalParts;
+      modifiedParts = contentfulParts.modifiedParts;
+    } else {
+      originalParts = [<div key="loading">Loading...</div>];
+      modifiedParts = [<div key="loading">Loading...</div>];
+    }
   }
 
   if (viewMode === 'inline') {

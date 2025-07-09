@@ -1,8 +1,69 @@
 import React from 'react';
-import { Document, Block, Inline, Text, BLOCKS } from '@contentful/rich-text-types';
+import { BLOCKS, Document, Block, Inline, Text } from '@contentful/rich-text-types';
 
-// ...extractPlainText, extractStructuredContent, isContentfulDocument (unchanged)...
+// Exported type guard for Contentful documents
+export function isContentfulDocument(value: any): value is Document {
+  return (
+    value &&
+    typeof value === 'object' &&
+    value.nodeType === BLOCKS.DOCUMENT &&
+    Array.isArray(value.content)
+  );
+}
 
+// Extract plain text from Contentful document
+export function extractPlainText(document: Document): string {
+  const extractFromNode = (node: Block | Inline | Text): string => {
+    if (node.nodeType === 'text') {
+      return (node as Text).value;
+    }
+    if ('content' in node && node.content) {
+      return node.content.map(child => extractFromNode(child)).join('');
+    }
+    return '';
+  };
+  return extractFromNode(document);
+}
+
+// Extract structured content for structure diff
+export function extractStructuredContent(document: Document): Array<{ type: string; content: string; level?: number }> {
+  const result: Array<{ type: string; content: string; level?: number }> = [];
+  const extractFromNode = (node: Block | Inline | Text): void => {
+    if (node.nodeType === 'text') return;
+    if ('content' in node && node.content) {
+      const textContent = node.content.map(child =>
+        child.nodeType === 'text' ? (child as Text).value : ''
+      ).join('');
+      let displayType: string = node.nodeType;
+      let headingLevel: number | undefined;
+      switch (node.nodeType) {
+        case BLOCKS.HEADING_1: displayType = 'Heading'; headingLevel = 1; break;
+        case BLOCKS.HEADING_2: displayType = 'Heading'; headingLevel = 2; break;
+        case BLOCKS.HEADING_3: displayType = 'Heading'; headingLevel = 3; break;
+        case BLOCKS.HEADING_4: displayType = 'Heading'; headingLevel = 4; break;
+        case BLOCKS.HEADING_5: displayType = 'Heading'; headingLevel = 5; break;
+        case BLOCKS.HEADING_6: displayType = 'Heading'; headingLevel = 6; break;
+        case BLOCKS.PARAGRAPH: displayType = 'Text'; break;
+        case BLOCKS.UL_LIST: displayType = 'List'; break;
+        case BLOCKS.OL_LIST: displayType = 'Numbered List'; break;
+        case BLOCKS.LIST_ITEM: displayType = 'List Item'; break;
+        case BLOCKS.QUOTE: displayType = 'Quote'; break;
+        case BLOCKS.TABLE: displayType = 'Table'; break;
+        default: displayType = node.nodeType.charAt(0).toUpperCase() + node.nodeType.slice(1);
+      }
+      if (textContent.trim()) {
+        result.push({ type: displayType, content: textContent.trim(), level: headingLevel });
+      }
+      node.content.forEach(child => {
+        if (child.nodeType !== 'text') extractFromNode(child);
+      });
+    }
+  };
+  if (document.content) document.content.forEach(node => extractFromNode(node));
+  return result;
+}
+
+// Main Contentful diff renderer
 export async function renderContentfulDiff(
   origDoc: Document,
   modDoc: Document,
@@ -10,8 +71,9 @@ export async function renderContentfulDiff(
   caseSensitive: boolean,
   renderStringDiff: (a: string, b: string) => { originalParts: any[]; modifiedParts: any[] }
 ) {
-  // Dynamically import diff (CJS) for Vite/ESM compatibility
-  const Diff = await import('diff');
+  // Dynamically import diff for Vite/ESM compatibility
+  const DiffModule = await import('diff');
+  const Diff = DiffModule.default ?? DiffModule;
   const { diffWords, diffArrays } = Diff;
 
   if (compareMode === 'structure') {
