@@ -1,207 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Compare } from '../components/Compare';
-import { Document, BLOCKS, MARKS } from '@contentful/rich-text-types';
+import { originalRichText, modifiedRichText } from '../../__mocks__/richtext.mock';
 
-// Sample Contentful documents for stories
-const sampleContentfulDoc1: Document = {
-  nodeType: BLOCKS.DOCUMENT,
-  data: {},
-  content: [
-    {
-      nodeType: BLOCKS.HEADING_1,
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Getting Started with React',
-          marks: [],
-          data: {},
-        },
-      ],
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'React is a ',
-          marks: [],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: 'powerful',
-          marks: [{ type: MARKS.BOLD }],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: ' JavaScript library for building user interfaces.',
-          marks: [],
-          data: {},
-        },
-      ],
-    },
-    {
-      nodeType: BLOCKS.UL_LIST,
-      data: {},
-      content: [
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          data: {},
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              data: {},
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Component-based architecture',
-                  marks: [],
-                  data: {},
-                },
-              ],
-            },
-          ],
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          data: {},
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              data: {},
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Virtual DOM for performance',
-                  marks: [],
-                  data: {},
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-
-const sampleContentfulDoc2: Document = {
-  nodeType: BLOCKS.DOCUMENT,
-  data: {},
-  content: [
-    {
-      nodeType: BLOCKS.HEADING_1,
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Getting Started with React Development',
-          marks: [],
-          data: {},
-        },
-      ],
-    },
-    {
-      nodeType: BLOCKS.PARAGRAPH,
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'React is a ',
-          marks: [],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: 'powerful',
-          marks: [{ type: MARKS.BOLD }],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: ' and ',
-          marks: [],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: 'flexible',
-          marks: [{ type: MARKS.ITALIC }],
-          data: {},
-        },
-        {
-          nodeType: 'text',
-          value: ' JavaScript library for building modern user interfaces.',
-          marks: [],
-          data: {},
-        },
-      ],
-    },
-    {
-      nodeType: BLOCKS.UL_LIST,
-      data: {},
-      content: [
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          data: {},
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              data: {},
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Component-based architecture',
-                  marks: [],
-                  data: {},
-                },
-              ],
-            },
-          ],
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          data: {},
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              data: {},
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Virtual DOM for optimized performance',
-                  marks: [],
-                  data: {},
-                },
-              ],
-            },
-          ],
-        },
-        {
-          nodeType: BLOCKS.LIST_ITEM,
-          data: {},
-          content: [
-            {
-              nodeType: BLOCKS.PARAGRAPH,
-              data: {},
-              content: [
-                {
-                  nodeType: 'text',
-                  value: 'Hooks for state management',
-                  marks: [],
-                  data: {},
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
+// Use the mocks from __mocks__/richtext.mock.ts for realistic stories
 
 const meta: Meta<typeof Compare> = {
   title: 'Compare/Contentful Rich Text',
@@ -243,8 +44,8 @@ type Story = StoryObj<typeof Compare>;
 
 export const ContentfulTextMode: Story = {
   args: {
-    original: sampleContentfulDoc1,
-    modified: sampleContentfulDoc2,
+    original: originalRichText,
+    modified: modifiedRichText,
     compareMode: 'text',
     viewMode: 'side-by-side',
   },
@@ -259,8 +60,8 @@ export const ContentfulTextMode: Story = {
 
 export const ContentfulStructureMode: Story = {
   args: {
-    original: sampleContentfulDoc1,
-    modified: sampleContentfulDoc2,
+    original: originalRichText,
+    modified: modifiedRichText,
     compareMode: 'structure',
     viewMode: 'side-by-side',
   },
@@ -275,8 +76,8 @@ export const ContentfulStructureMode: Story = {
 
 export const ContentfulInlineView: Story = {
   args: {
-    original: sampleContentfulDoc1,
-    modified: sampleContentfulDoc2,
+    original: originalRichText,
+    modified: modifiedRichText,
     compareMode: 'structure',
     viewMode: 'inline',
   },

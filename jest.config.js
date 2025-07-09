@@ -21,8 +21,7 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.(ts|tsx|js)',
-    '<rootDir>/src/**/*.(test|spec).(ts|tsx|js)'
+    '<rootDir>/**/__tests__/**/*.(ts|tsx|js)'
   ],
   collectCoverage: true,
   collectCoverageFrom: [
