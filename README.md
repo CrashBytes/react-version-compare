@@ -4,14 +4,22 @@ A React component for comparing strings and arrays with precise word-level and i
 
 [![npm version](https://badge.fury.io/js/react-version-compare.svg)](https://badge.fury.io/js/react-version-compare)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Coverage](https://img.shields.io/badge/coverage-99.31%25-brightgreen.svg)](https://crashbytes.github.io/react-version-compare/coverage/)
+[![Tests](https://img.shields.io/badge/tests-124%20passing-brightgreen.svg)](https://crashbytes.github.io/react-version-compare/coverage/)
 
-## Live Storybook Demo
+## Live Demos
 
-You can explore and interact with all features of this component in the live Storybook:
+### Interactive Storybook
 
-👉 **[Live Storybook Demo](https://crashbytes.github.io/react-version-compare/)**
+👉 **[Live Storybook Demo](https://crashbytes.github.io/react-version-compare/storybook/)**
 
-The Storybook provides interactive examples for all comparison scenarios. You can adjust the inputs and props using the controls panel to see how the component behaves with different data. This is the best way to preview, test, and understand the capabilities of `react-version-compare` without writing any code.
+Explore and interact with all features of this component. Adjust inputs and props using the controls panel to see how the component behaves with different data.
+
+### Test Coverage Report
+
+📊 **[View Coverage Report](https://crashbytes.github.io/react-version-compare/coverage/)**
+
+Detailed test coverage metrics showing 99.31% statement coverage, 94.39% branch coverage, and 100% function coverage.
 
 ## Features
 
@@ -23,6 +31,7 @@ The Storybook provides interactive examples for all comparison scenarios. You ca
 - 📱 **Responsive**: Works on desktop and mobile devices
 - ⚡ **TypeScript Support**: Full TypeScript definitions included
 - 🎛️ **Multiple Views**: Side-by-side or inline comparison modes
+- ✅ **Comprehensive Testing**: 80%+ test coverage with 114+ test scenarios
 
 ## Installation
 
@@ -161,6 +170,55 @@ const modified = ['Item A', 'Modified Item B', 'Item C', 'Item D'];
 />
 ```
 
+## Testing
+
+This package includes comprehensive unit and integration tests with 80%+ coverage.
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests in watch mode (for development)
+npm run test:watch
+
+# Run specific test file
+npm test -- Compare.enhanced.test.tsx
+```
+
+### Test Coverage
+
+The test suite includes:
+- **114+ test scenarios** covering edge cases and real-world usage
+- **Unit tests**: Component logic, utility functions, type guards
+- **Integration tests**: Real-world scenarios (code snippets, JSON, SQL, URLs)
+- **Edge case tests**: Empty inputs, null/undefined, large datasets, unicode
+- **Accessibility tests**: Semantic structure, screen reader support
+- **Performance tests**: Large arrays (100+ items), large strings (1000+ words)
+
+Coverage thresholds enforced by Jest:
+- Branches: 75%
+- Functions: 80%
+- Lines: 80%
+- Statements: 80%
+
+See [TEST-COVERAGE-SUMMARY.md](./TEST-COVERAGE-SUMMARY.md) for detailed test documentation.
+
+### Test Files
+
+```
+__tests__/
+├── Compare.test.tsx                    # Original basic tests
+├── Compare.enhanced.test.tsx           # Edge cases & comprehensive coverage
+├── Compare.integration.test.tsx        # Real-world scenarios
+├── ContentfulDiff.test.tsx             # Original utility tests
+└── ContentfulDiff.enhanced.test.tsx    # Complete utility coverage
+```
+
 ## Styling
 
 The component uses CSS classes that you can customize:
@@ -204,6 +262,25 @@ Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+### Development Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Build the package
+npm run build
+
+# Run Storybook for local development
+npm run storybook
+```
 
 ## Support
 

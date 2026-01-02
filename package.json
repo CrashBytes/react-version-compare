@@ -18,6 +18,8 @@
     "test": "jest --no-coverage",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
+    "coverage:report": "jest --coverage && open coverage/lcov-report/index.html",
+    "coverage:deploy": "npm run test:coverage && gh-pages -d coverage/lcov-report -e coverage",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
     "lint": "eslint src --ext .ts,.tsx",
@@ -27,7 +29,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "storybook:build": "storybook build",
-    "storybook:deploy": "storybook build && gh-pages -d storybook-static"
+    "storybook:deploy": "npm run build-storybook && gh-pages -d storybook-static",
+    "deploy:all": "npm run test:coverage && npm run build-storybook && npm run deploy:combined",
+    "deploy:combined": "node scripts/deploy-gh-pages.js"
   },
   "keywords": [
     "react",
