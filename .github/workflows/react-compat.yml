@@ -1,0 +1,56 @@
+name: React Compatibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Tuesdays at 9 AM UTC
+    - cron: '0 9 * * 2'
+  workflow_dispatch:
+
+jobs:
+  test-react-versions:
+    name: Test React ${{ matrix.react-version }}
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        react-version: ['18', '19']
+        
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install React ${{ matrix.react-version }}
+        run: |
+          npm install --save-dev react@${{ matrix.react-version }} react-dom@${{ matrix.react-version }}
+
+      - name: Run tests
+        run: npm test
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Build
+        run: npm run build
+
+      - name: Update badge (React 18)
+        if: matrix.react-version == '18' && github.ref == 'refs/heads/main'
+        run: |
+          echo "React 18 compatibility: ✅ Passing" >> $GITHUB_STEP_SUMMARY
+
+      - name: Update badge (React 19)
+        if: matrix.react-version == '19' && github.ref == 'refs/heads/main'
+        run: |
+          echo "React 19 compatibility: ✅ Passing" >> $GITHUB_STEP_SUMMARY

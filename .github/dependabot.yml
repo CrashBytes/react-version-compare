@@ -1,0 +1,73 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    groups:
+      # Group all production dependencies
+      production-dependencies:
+        applies-to: version-updates
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      # Group development dependencies
+      development-dependencies:
+        applies-to: version-updates
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      # Group testing dependencies
+      testing-dependencies:
+        applies-to: version-updates
+        patterns:
+          - "@testing-library/*"
+          - "jest*"
+          - "@types/jest"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      # Group build tools
+      build-tools:
+        applies-to: version-updates
+        patterns:
+          - "rollup*"
+          - "@rollup/*"
+          - "typescript"
+          - "vite"
+        update-types:
+          - "minor"
+          - "patch"
+    
+    # Auto-assign PRs
+    assignees:
+      - "MichaelEakins"
+    
+    # Labels for PRs
+    labels:
+      - "dependencies"
+      - "automated"
+    
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(actions)"

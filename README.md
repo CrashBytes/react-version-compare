@@ -2,8 +2,14 @@
 
 A React component for comparing strings and arrays with precise word-level and item-level highlighting of differences.
 
-[![npm version](https://badge.fury.io/js/react-version-compare.svg)](https://badge.fury.io/js/react-version-compare)
+[![npm version](https://badge.fury.io/js/%40crashbytes%2Freact-version-compare.svg)](https://www.npmjs.com/package/@crashbytes/react-version-compare)
+[![npm](https://img.shields.io/npm/v/@crashbytes/react-version-compare.svg)](https://www.npmjs.com/package/@crashbytes/react-version-compare)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![npm Audit](https://github.com/CrashBytes/react-version-compare/actions/workflows/security-audit.yml/badge.svg)](https://github.com/CrashBytes/react-version-compare/actions/workflows/security-audit.yml)
+[![CodeQL](https://github.com/CrashBytes/react-version-compare/actions/workflows/security-audit.yml/badge.svg?branch=main)](https://github.com/CrashBytes/react-version-compare/security/code-scanning)
+[![React 18](https://github.com/CrashBytes/react-version-compare/actions/workflows/react-compat.yml/badge.svg)](https://github.com/CrashBytes/react-version-compare/actions/workflows/react-compat.yml)
+[![React 19](https://github.com/CrashBytes/react-version-compare/actions/workflows/react-compat.yml/badge.svg)](https://github.com/CrashBytes/react-version-compare/actions/workflows/react-compat.yml)
+[![npm Provenance](https://img.shields.io/badge/provenance-sigstore-blue)](https://www.npmjs.com/package/@crashbytes/react-version-compare)
 [![Coverage](https://img.shields.io/badge/coverage-99.31%25-brightgreen.svg)](https://crashbytes.github.io/react-version-compare/coverage/)
 [![Tests](https://img.shields.io/badge/tests-124%20passing-brightgreen.svg)](https://crashbytes.github.io/react-version-compare/coverage/)
 

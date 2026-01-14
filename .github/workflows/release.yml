@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+# CRITICAL: Required for npm Trusted Publishing (OIDC authentication)
+permissions:
+  contents: write  # Needed to create GitHub releases
+  id-token: write  # Needed for npm provenance/trusted publishing
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          # NO registry-url - prevents .npmrc conflicts with OIDC
+
+      - name: Upgrade npm for Trusted Publishing
+        run: npm install -g npm@latest  # Requires npm >= 11.5.1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+      - name: Type Check
+        run: npm run type-check
+
+      - name: Publish to npm with Provenance
+        run: npm publish --provenance --access public
+        # OIDC authentication via GitHub Actions - no tokens needed!
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            See [CHANGELOG.md](https://github.com/CrashBytes/react-version-compare/blob/main/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false

@@ -1,6 +1,40 @@
 # Changelog
 
-## [Unreleased] - 2026-01-02
+## [Unreleased]
+### Changed
+- Placeholder for future changes
+
+## [1.0.4] - 2026-01-14
+
+### Security
+- **npm Trusted Publishing enabled** - packages published via OIDC (no tokens)
+- **Cryptographic provenance** - every release includes verifiable supply chain attestation
+- **Automated security audits** - weekly dependency vulnerability scanning via GitHub Actions
+- **Dependabot enabled** - automated dependency updates with grouped PRs
+- **CodeQL analysis** - continuous code security scanning
+- **React compatibility testing** - automated React 18 & 19 compatibility matrix
+- Zero known vulnerabilities (npm audit clean)
+
+### Infrastructure
+- Migrated to npm Trusted Publishing (OIDC) from classic tokens
+- New tag-based release workflow (replaces auto-bump on push)
+- Automated release workflow with provenance generation
+- Supply chain verification via Sigstore transparency log
+- GitHub Releases automatically created from tags
+- Comprehensive security badge suite in README
+
+### Documentation
+- Added SECURITY.md with vulnerability reporting process
+- Updated README with security badges (npm Audit, CodeQL, React compatibility, Provenance)
+- Fixed npm package name in badges (@crashbytes/react-version-compare)
+
+**Verify Package Provenance:**
+```bash
+npm view @crashbytes/react-version-compare dist.integrity
+# Or visit: https://www.npmjs.com/package/@crashbytes/react-version-compare
+```
+
+## [1.0.3] - 2026-01-02
 ### Added
 - Comprehensive unit test suite with 80%+ coverage targeting
 - GitHub Pages deployment for Storybook and test coverage
