@@ -1,6 +1,6 @@
 {
   "name": "@crashbytes/react-version-compare",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "A React component for comparing strings and arrays with precise word-level and item-level highlighting of differences.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-types": "^17.2.5",
-    "diff": "^8.0.3",
+    "diff": "^9.0.0",
     "tslib": "^2.8.1"
   },
   "devDependencies": {
@@ -69,20 +69,20 @@
     "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
-    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-babel": "^7.0.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@storybook/addon-docs": "^10.2.13",
-    "@storybook/addon-onboarding": "^10.2.13",
-    "@storybook/react-vite": "^10.2.13",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/addon-onboarding": "^10.3.6",
+    "@storybook/react-vite": "^10.3.6",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-react": "^6.0.1",
     "babel-jest": "^30.2.0",
     "gh-pages": "^6.3.0",
     "identity-obj-proxy": "^3.0.0",
@@ -91,11 +91,11 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "rollup": "^4.59.0",
-    "rollup-plugin-dts": "^6.3.0",
+    "rollup-plugin-dts": "^6.4.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "^10.2.13",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1"
+    "storybook": "^10.3.6",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.10"
   }
 }
