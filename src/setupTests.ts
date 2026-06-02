@@ -1,5 +1,5 @@
 // src/setupTests.ts
-require('@testing-library/jest-dom');
+import '@testing-library/jest-dom';
 
 // Suppress act() warnings for async Contentful rendering
 // This is expected behavior - the component renders loading state first,
