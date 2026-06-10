@@ -49,7 +49,7 @@ jobs:
         if: github.ref_type == 'tag'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
             See [CHANGELOG.md](https://github.com/CrashBytes/react-version-compare/blob/main/CHANGELOG.md) for details.
