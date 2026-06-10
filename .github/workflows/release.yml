@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch: {}
 
 # CRITICAL: Required for npm Trusted Publishing (OIDC authentication)
 permissions:
