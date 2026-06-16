@@ -55,6 +55,9 @@
   "bugs": {
     "url": "https://github.com/CrashBytes/react-version-compare/issues"
   },
+  "overrides": {
+    "esbuild": ">=0.28.1"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
