@@ -36,7 +36,7 @@ jobs:
         continue-on-error: true
 
       - name: Run npm audit (production only)
-        run: npm audit --production --audit-level=moderate
+        run: npm audit --omit=dev --audit-level=moderate
 
   dependency-review:
     name: Dependency Review
