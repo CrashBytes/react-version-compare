@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "7.0",
+    "ignoreDeprecations": "6.0",
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
