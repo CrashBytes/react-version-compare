@@ -56,7 +56,16 @@
     "url": "https://github.com/CrashBytes/react-version-compare/issues"
   },
   "overrides": {
-    "esbuild": ">=0.28.1"
+    "esbuild": ">=0.28.1",
+    "minimatch@^3.0.0": {
+      "brace-expansion": "1.1.18"
+    },
+    "minimatch@^9.0.0": {
+      "brace-expansion": "2.1.4"
+    },
+    "minimatch@^10.0.0": {
+      "brace-expansion": "5.0.9"
+    }
   },
   "peerDependencies": {
     "react": ">=16.8.0",
