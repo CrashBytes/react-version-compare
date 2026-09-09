@@ -72,9 +72,7 @@ export async function renderContentfulDiff(
   renderStringDiff: (a: string, b: string) => { originalParts: any[]; modifiedParts: any[] }
 ) {
   // Dynamically import diff for Vite/ESM compatibility
-  const DiffModule = await import('diff');
-  const Diff = DiffModule.default ?? DiffModule;
-  const { diffWords, diffArrays } = Diff;
+  const { diffWords, diffArrays } = await import('diff');
 
   if (compareMode === 'structure') {
     const origStructure = extractStructuredContent(origDoc);

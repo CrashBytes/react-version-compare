@@ -14,7 +14,11 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@mocks/*": ["./__mocks__/*"]
+    }
   },
   "include": ["src", "__tests__", "__mocks__"],
   "exclude": ["src/stories"]
