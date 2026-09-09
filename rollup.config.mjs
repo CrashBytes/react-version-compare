@@ -41,7 +41,6 @@ export default [
         minimize: true,
       }),
       typescript({
-        tsconfig: './tsconfig.json',
         declaration: false,
       }),
       babel({
