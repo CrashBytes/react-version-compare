@@ -41,8 +41,11 @@ export default [
         minimize: true,
       }),
       typescript({
-        tsconfig: './tsconfig.json',
-        declaration: false
+        declaration: false,
+        compilerOptions: {
+          target: 'ES2020',
+          module: 'ESNext'
+        }
       }),
       babel({
         babelHelpers: 'bundled',
