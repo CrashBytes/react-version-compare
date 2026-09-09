@@ -44,6 +44,8 @@ export default [
         tsconfig: false,
         compilerOptions: {
           declaration: false,
+          target: 'esnext',
+          module: 'esnext',
         },
       }),
       babel({
