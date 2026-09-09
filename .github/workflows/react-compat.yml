@@ -14,19 +14,23 @@ jobs:
   test-react-versions:
     name: Test React ${{ matrix.react-version }}
     runs-on: ubuntu-latest
-    
+
     strategy:
       fail-fast: false
       matrix:
-        react-version: ['18', '19']
-        
+        include:
+          - react-version: '18'
+            node-version: '20'
+          - react-version: '19'
+            node-version: '22'
+
     steps:
       - uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
       - name: Install dependencies
