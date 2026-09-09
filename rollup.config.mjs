@@ -42,10 +42,6 @@ export default [
       }),
       typescript({
         declaration: false,
-        compilerOptions: {
-          target: 'ES2020',
-          module: 'ESNext'
-        }
       }),
       babel({
         babelHelpers: 'bundled',
