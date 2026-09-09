@@ -40,10 +40,9 @@ export default [
         extract: 'styles.css',
         minimize: true,
       }),
-      typescript({ 
-        tsconfig: './tsconfig.json', 
-        declaration: false,
-        compilerOptions: { outDir: 'dist' }
+      typescript({
+        tsconfig: './tsconfig.json',
+        declaration: false
       }),
       babel({
         babelHelpers: 'bundled',
