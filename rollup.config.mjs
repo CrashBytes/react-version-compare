@@ -41,11 +41,9 @@ export default [
         minimize: true,
       }),
       typescript({
-        tsconfig: false,
+        tsconfig: './tsconfig.json',
         compilerOptions: {
           declaration: false,
-          target: 'esnext',
-          module: 'esnext',
         },
       }),
       babel({
