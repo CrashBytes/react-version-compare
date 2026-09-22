@@ -41,8 +41,10 @@ export default [
         minimize: true,
       }),
       typescript({
-        tsconfig: false,
-        declaration: false,
+        tsconfig: './tsconfig.json',
+        compilerOptions: {
+          declaration: false,
+        },
       }),
       babel({
         babelHelpers: 'bundled',
