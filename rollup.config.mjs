@@ -44,6 +44,7 @@ export default [
         tsconfig: './tsconfig.json',
         compilerOptions: {
           declaration: false,
+          outDir: 'dist',
         },
       }),
       babel({
