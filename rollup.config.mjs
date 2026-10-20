@@ -45,6 +45,8 @@ export default [
         compilerOptions: {
           declaration: false,
           outDir: 'dist',
+          module: 'esnext',
+          target: 'esnext',
         },
       }),
       babel({
